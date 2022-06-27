@@ -2,13 +2,15 @@ import tkinter as UI
 import time
 import tkinter.font as tkfont
 import datetime
+import webbrowser
 
 window = UI.Tk(className="/WaterLog")
 mainspace = UI.Frame(master = window)
 mainpage = UI.Frame(master = mainspace, relief = UI.RAISED, borderwidth = 3, width = 100, height = 300)
+
 today = 0
 page = 0
-
+helpurl = "https://github.com/trufflewar/waterlog/wiki"
 
 
 #SETUP BOTTOM MENU
@@ -41,7 +43,7 @@ help_button = UI.Button(master = header, image = help_img_new, relief = UI.RAISE
 help_button.grid(column = 0, row = 0, padx = 5, pady = 5)
 
 title = UI.Label(master = header, text = "WaterLog", bg = "#00d9d2")
-title. grid(column = 1, row = 0, padx = 5, pady = 5)
+title.grid(column = 1, row = 0, padx = 5, pady = 5)
 
 cog_img = UI.PhotoImage(file = "Waterlog/clipart171375.png")
 cog_img_new = cog_img.subsample(25,25)
@@ -51,7 +53,6 @@ settings_button.grid(column = 2, row = 0, padx = 5, pady = 5)
 
 
 #SETUP FUNCTIONS FOR BASE AND HEADER BUTTONS AND BIND ACTIONS TO BUTTONS
-
 def home_btn(event):
     page = "Home"
     go_home()
@@ -70,6 +71,18 @@ log_button.bind("<Button-1>", log_btn)
 
 def settings_btn(event):
     page = "Settings"
+    settings_page()
+settings_button.bind("<Button-1>", settings_btn)
+
+def help_btn(event):
+    webbrowser.open(helpurl)
+help_button.bind("<Button-1>", help_btn)
+
+
+#INCREMENT DRUNK FUNCTION
+def increment(increment_value):
+   global today
+   today = today + increment_value
 
 
 #HOME PAGE
@@ -88,8 +101,17 @@ def go_home():
     today_message = UI.Label(master = today_widget, text = "Today you've drunk " + str(today) + "ml", bg = "#00d9d2")
     today_message.grid(row = 0, column = 0, sticky = "nsew")
 
+    #Home log buttons
+    home_log_buttons = UI.Frame(master = mainpage)
     
-    home_log_buttons = UI.Frame()
+
+
+    #Log button 1 
+    value1 = 90
+    log_button_1 = UI.Button(master = home_log_buttons, text = ("Log " + str(value1) + "ml") , relief = UI.RAISED, borderwidth = 3, bg = "#00d9d2", width = 8)
+    log_button_1.pack()
+
+
     
     
 #LOG PAGE
@@ -108,12 +130,15 @@ def graph_page():
     
     mainpage = UI.Frame(master = mainspace)
     mainpage.pack(side = UI.TOP, fill = "both", expand = True)
-    
+
+
+#SETTINGS PAGE
 def settings_page():
     global mainpage
     mainpage.destroy()
     
     mainpage = UI.Frame(master = mainspace)
+    mainpage.pack(side = UI.TOP, fill = "both", expand = True)
     
 
 #INITIATE BASE and HEADER SETUP
