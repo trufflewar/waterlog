@@ -1,7 +1,5 @@
 import tkinter as UI
-import time
 import tkinter.font as tkfont
-import datetime
 import webbrowser
 
 window = UI.Tk(className="/WaterLog")
@@ -77,12 +75,6 @@ settings_button.bind("<Button-1>", settings_btn)
 def help_btn(event):
     webbrowser.open(helpurl)
 help_button.bind("<Button-1>", help_btn)
-
-
-#INCREMENT DRUNK FUNCTION
-def increment(increment_value):
-   global today
-   today = today + increment_value
 
 
 #HOME PAGE
