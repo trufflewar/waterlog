@@ -16,18 +16,16 @@ today = 0
 page = 0
 helpurl = "https://github.com/trufflewar/waterlog/wiki"
 
-
-global value1 
+global value1
 global value2
 file = open("Waterlog/logbuttons.csv", "r")
 reader = csv.reader(file)
 contents = []
 for item in reader:
-  contents.append(item)
-value1 = int(contents[0])
-value2 = int(contents[1])
+    contents.append(item)
+value1 = int(contents[0][0])
+value2 = int(contents[1][0])
 file.close()
-
 
 #SETUP BOTTOM MENU
 base = UI.Frame(master=window,
@@ -158,7 +156,8 @@ def go_home():
     today_widget.columnconfigure(0)
     today_widget.rowconfigure(0)
     today_message = UI.Label(master=today_widget,
-                             text="Today you've drunk " + str(today) + "ml",
+                             text="Today you've drunk " +
+                             str(backend.gettoday()) + "ml",
                              bg="#00d9d2")
     today_message.grid(row=0, column=0, sticky="nsew")
 
@@ -169,7 +168,6 @@ def go_home():
     home_log_buttons.pack()
 
     #Log buttons
-    
 
     log_button_1 = UI.Button(master=home_log_buttons,
                              text=("Log  " + str(value1) + "ml"),
@@ -179,8 +177,8 @@ def go_home():
                              width=8)
     log_button_1.grid(row=0, column=0, sticky="nsew")
 
-    def log_btn_1():
-        backend.log(value1)
+    def log_btn_1(event):
+        backend.logvalue(value1)
 
     log_button_1.bind("<Button-1>", log_btn_1)
 
@@ -192,8 +190,8 @@ def go_home():
                              width=8)
     log_button_2.grid(row=0, column=1, sticky="nsew")
 
-    def log_btn_2():
-        backend.log(value2)
+    def log_btn_2(event):
+        backend.logvalue(value2)
 
     log_button_2.bind("<Button-1>", log_btn_2)
 

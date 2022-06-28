@@ -28,5 +28,10 @@ def logvalue(value):
   writer = csv.writer(file)
   file.write(str(datetime.datetime.now())+","+str(value)+"\n")
   file.close()
-  
+  print("Logged",str(value))
+
+def gettoday():
+  file = getfile()
+  for item in file:
+    print(item)
   
