@@ -169,6 +169,8 @@ def go_home():
 
     def log_btn_1(event):
         backend.logvalue(value1)
+        today_message.config(text="Today you've drunk " +
+                             str(backend.gettoday()) + "ml")
 
     log_button_1.bind("<Button-1>", log_btn_1)
 
@@ -182,7 +184,8 @@ def go_home():
 
     def log_btn_2(event):
         backend.logvalue(value2)
-
+        today_message.config(text="Today you've drunk " +
+                             str(backend.gettoday()) + "ml")
     log_button_2.bind("<Button-1>", log_btn_2)
 
 

@@ -1,7 +1,11 @@
 import datetime
 import csv
 
-filename = "data.csv"
+filename = "Waterlog/data.csv"
+
+def startup():
+  
+  pass
 
 
 def update():
