@@ -2,6 +2,7 @@ import tkinter as UI
 import tkinter.font as tkfont
 import webbrowser
 import backend
+import csv
 
 window = UI.Tk(className="/WaterLog")
 mainspace = UI.Frame(master=window)
@@ -18,9 +19,13 @@ helpurl = "https://github.com/trufflewar/waterlog/wiki"
 
 global value1 
 global value2
-file = open("logbuttons.txt", "r")
-value1 = int(file.readlines(0))
-value2 = int(file.readlines(1))
+file = open("Waterlog/logbuttons.csv", "r")
+reader = csv.reader(file)
+contents = []
+for item in reader:
+  contents.append(item)
+value1 = int(contents[0])
+value2 = int(contents[1])
 file.close()
 
 
