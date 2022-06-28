@@ -101,39 +101,29 @@ settings_button.grid(column=2, row=0, padx=5, pady=5)
 def homepage_btn(event):
     page = "Home"
     go_home()
-
-
 home_button.bind("<Button-1>", homepage_btn)
 
 
 def graphpage_btn(event):
     page = "Graphs"
     graph_page()
-
-
 graph_button.bind("<Button-1>", graphpage_btn)
 
 
 def logpage_btn(event):
     page = "Log"
     log_page()
-
-
 log_button.bind("<Button-1>", logpage_btn)
 
 
 def settingspage_btn(event):
     page = "Settings"
     settings_page()
-
-
 settings_button.bind("<Button-1>", settingspage_btn)
 
 
 def help_btn(event):
     webbrowser.open(helpurl)
-
-
 help_button.bind("<Button-1>", help_btn)
 
 

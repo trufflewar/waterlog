@@ -30,8 +30,16 @@ def logvalue(value):
   file.close()
   print("Logged",str(value))
 
+
+
 def gettoday():
+  update()
   file = getfile()
-  for item in file:
-    print(item)
-  
+  total = 0
+  for item in reversed(file):
+    if today in item:
+#      print(file[item])
+      total += int(file[item])
+    else:
+      pass
+  return(total)
