@@ -15,12 +15,16 @@ mainpage = UI.Frame(master=mainspace,
 today = 0
 page = 0
 helpurl = "https://github.com/trufflewar/waterlog/wiki"
+global log_value
+log_value = 300
 
 global value1
 global value2
 file = open("Waterlog/logbuttons.csv", "r")
 reader = csv.reader(file)
 contents = []
+
+
 for item in reader:
     contents.append(item)
 value1 = int(contents[0][0])
@@ -190,14 +194,74 @@ def go_home():
 
 
 #LOG PAGE
+#LOG PAGE
 def log_page():
     global mainpage
     mainpage.destroy()
 
     mainpage = UI.Frame(master=mainspace)
     mainpage.pack(side=UI.TOP, fill="both", expand=True)
+    
+    
+    # Log widget
+    log_value = 300
+    log_widget = UI.Frame(master=mainpage, relief=UI.RAISED, borderwidth=1)
+    log_widget.columnconfigure(0, weight = 8)
+    log_widget.columnconfigure(1, weight = 2)
+    log_widget.columnconfigure(2, weight = 4)
+    log_widget.rowconfigure(0, weight = 4)
 
 
+    num_box = UI.Label(master = log_widget, text = str(log_value) + "ml")
+    num_box.grid(row = 0, column = 0)
+  
+    
+    counter_buttons = UI.Frame(master = log_widget)
+    counter_buttons.columnconfigure(0)
+    counter_buttons.rowconfigure(0)
+    counter_buttons.rowconfigure(1)
+    
+    up_button = UI.Button(master=counter_buttons, text = "+", relief = UI.RAISED, borderwidth = 1)
+    up_button.grid(row=0, column = 0)
+    def up_btn(event):
+      global log_value
+      log_value += 10
+      num_box.config(text= str(log_value) + "ml")
+    up_button.bind("<Button-1>", up_btn)
+
+    down_button = UI.Button(master=counter_buttons, text = "-", relief = UI.RAISED, borderwidth = 1)
+    down_button.grid(row=1, column = 0)
+    def down_btn(event):
+      global log_value
+      log_value += -10
+      if log_value < 0:
+        log_value = 0
+      num_box.config(text= str(log_value) + "ml")
+    down_button.bind("<Button-1>", down_btn)
+   
+    counter_buttons.grid(row=0, column=1)
+
+  
+    log_page_log_button = UI.Button(master = log_widget, text = "Log", relief = UI.RAISED, borderwidth = 1)
+    log_page_log_button.grid(row = 0, column = 2)
+    def log_page_log_btn(event):
+      global log_value
+      backend.logvalue(log_value)
+    log_page_log_button.bind("<Button-1>", log_page_log_btn)
+
+
+    log_widget.pack(padx=5, pady = 5)
+
+  
+    
+
+
+  
+
+  
+
+
+#GRAPH PAGE
 #GRAPH PAGE
 def graph_page():
     global mainpage

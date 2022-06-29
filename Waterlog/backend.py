@@ -4,7 +4,6 @@ import csv
 filename = "Waterlog/data.csv"
 
 def startup():
-  
   pass
 
 
