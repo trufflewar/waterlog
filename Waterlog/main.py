@@ -197,6 +197,7 @@ def go_home():
 #LOG PAGE
 def log_page():
     global mainpage
+    global log_value
     mainpage.destroy()
 
     mainpage = UI.Frame(master=mainspace)
