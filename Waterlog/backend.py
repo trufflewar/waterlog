@@ -46,3 +46,11 @@ def gettoday():
     else:
       pass
   return(total)
+
+
+
+def getrecentrange(length):
+  update()
+  file = getfile()
+  if length=="today":
+    pass
