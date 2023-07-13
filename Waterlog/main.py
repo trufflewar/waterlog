@@ -5,6 +5,7 @@ import backend
 import csv
 
 window = UI.Tk(className="/WaterLog")
+#window.iconbitmap("4_generated.ico")
 mainspace = UI.Frame(master=window)
 mainpage = UI.Frame(master=mainspace,
                     relief=UI.RAISED,
@@ -43,13 +44,13 @@ base.columnconfigure(0, weight=5, minsize=100)
 base.columnconfigure(1, weight=6, minsize=120)
 base.columnconfigure(2, weight=5, minsize=100)
 
-graph_button = UI.Button(master=base,
-                         text="Graphs",
+history_button = UI.Button(master=base,
+                         text="History",
                          relief=UI.RAISED,
                          borderwidth=1,
                          bg="#00d9d2",
                          width=8)
-graph_button.grid(column=0, row=0, padx=5, pady=5)
+history_button.grid(column=0, row=0, padx=5, pady=5)
 
 home_button = UI.Button(master=base,
                         text="Home",
@@ -66,6 +67,7 @@ log_button = UI.Button(master=base,
                        bg="#00d9d2",
                        width=8)
 log_button.grid(column=2, row=0, padx=5, pady=5)
+
 
 #SETUP TOP BAR
 header = UI.Frame(master=window,
@@ -108,10 +110,10 @@ def homepage_btn(event):
 home_button.bind("<Button-1>", homepage_btn)
 
 
-def graphpage_btn(event):
-    page = "Graphs"
-    graph_page()
-graph_button.bind("<Button-1>", graphpage_btn)
+def historypage_btn(event):
+    page = "History"
+    history_page()
+history_button.bind("<Button-1>", historypage_btn)
 
 
 def logpage_btn(event):
@@ -264,12 +266,47 @@ def log_page():
 
 #GRAPH PAGE
 #GRAPH PAGE
-def graph_page():
+def history_page():
     global mainpage
     mainpage.destroy()
 
     mainpage = UI.Frame(master=mainspace)
     mainpage.pack(side=UI.TOP, fill="both", expand=True)
+
+    today_widget = UI.Frame(master=mainpage,
+                            bg="#00d9d2",
+                            relief=UI.RAISED,
+                            borderwidth=3,
+                            height=75,
+                            width=300)
+    today_widget.pack(fill=UI.X, padx=10, pady=10, expand=True)
+
+    today_widget.columnconfigure(0)
+    today_widget.rowconfigure(0)
+    today_message = UI.Label(master=today_widget,
+                             text="Today you've drunk " +
+                             str(backend.gettoday()) + "ml",
+                             bg="#00d9d2")
+    today_message.grid(row=0, column=0, sticky="nsew")
+
+
+    week_widget = UI.Frame(master=mainpage,
+                            bg="#00d9d2",
+                            relief=UI.RAISED,
+                            borderwidth=3,
+                            height=75,
+                            width=300)
+    week_widget.pack(fill=UI.X, padx=10, pady=10, expand=True)
+
+    week_widget.columnconfigure(0)
+    week_widget.rowconfigure(0)
+    week_message = UI.Label(master=today_widget,
+                             text="This week you've drunk " +
+                             #str(backend.getweek()) + 
+                            "ml",
+                             bg="#00d9d2")
+    week_message.grid(row=0, column=0, sticky="nsew")
+  
 
 
 #SETTINGS PAGE
